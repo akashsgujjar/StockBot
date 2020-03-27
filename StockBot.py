@@ -16,8 +16,8 @@ def data_gather(symbol):
 
 def analyze_low(tickerDf):
     close_price = tickerDf['Close'].to_list()
-    percent_drop = (.2 * close_price[0])
     for day in range(close_price.__len__() - 2):
+        percent_drop = (.2 * close_price[day])
         x = close_price[day]
         y = close_price[day + 1]
         z = close_price[day + 2]
@@ -27,8 +27,8 @@ def analyze_low(tickerDf):
 
 def analyze_high(tickerDf):
     close_price = tickerDf['Close'].to_list()
-    percent_up = (.1 * close_price[0])
     for day in range(close_price.__len__() - 2):
+        percent_up = (.2 * close_price[day])
         x = close_price[day]
         y = close_price[day + 1]
         z = close_price[day + 2]
