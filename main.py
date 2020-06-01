@@ -3,7 +3,7 @@ from datetime import date, timedelta
 import yfinance as yf
 #from Robinhood import Robinhood
 from urllib.request import urlopen
-import json
+#import json
 import numpy as np
 from flask import Flask
 
