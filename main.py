@@ -53,7 +53,7 @@ def analyze_change(tickerDf):
 def get_jsonparsed_data(url):
     response = urlopen(url)
     data = response.read().decode("utf-8")
-    return json.loads(data)
+    #return json.loads(data)
 
 
 def pe_check(symbol, weight):
