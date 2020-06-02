@@ -90,6 +90,8 @@ def finalPrint(conf_list):
         errorMessage = ""
         for stock in stock_list:
             errorMessage += stock + " "
+        for num in temp:
+            errorMessage += str(num) + " "
         return errorMessage
     return buy_me
 
