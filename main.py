@@ -87,7 +87,10 @@ def finalPrint(conf_list):
         for high in temp:
             buy_me += stock_list[high] + "\n"
     except:
-        return stock_list
+        errorMessage = ""
+        for stock in stock_list:
+            errorMessage += stock + " "
+        return errorMessage
     return buy_me
 
 
