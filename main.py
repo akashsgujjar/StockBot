@@ -2,4 +2,4 @@ from flask import Flask
 app = Flask(__name__)
 @app.route("/")
 def returnMe():
-    return "akash is the coolest"
+    return "akash is the coolest and amrutha isnt!"
