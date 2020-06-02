@@ -82,10 +82,12 @@ def finalPrint(conf_list):
         analyze_market(stock)
 
     conf_list = np.array(conf_list)
-    temp = np.argpartition(conf_list, -4)[-4:]
+    temp = np.argpartition(conf_list, -4)[-4:].tolist()
+
     try:
         for high in temp:
             buy_me += stock_list[high] + "\n"
+        temp.clear()
     except:
         errorMessage = ""
         for stock in stock_list:
@@ -93,6 +95,7 @@ def finalPrint(conf_list):
         for num in temp:
             errorMessage += str(num) + " "
         return errorMessage
+
     return buy_me
 
 
