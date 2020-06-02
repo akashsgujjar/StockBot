@@ -84,7 +84,6 @@ def finalPrint(conf_list):
             buy_me += stock_list[high] + "\n"
     except:
         errorMessage = "something is wrong haha "
-        print(stock_list)
         return stock_list
 
     return buy_me
