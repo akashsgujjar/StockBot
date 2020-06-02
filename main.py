@@ -87,7 +87,6 @@ def finalPrint(conf_list):
     try:
         for high in temp:
             buy_me += stock_list[high] + "\n"
-        conf_list.clear()
 
     except:
         errorMessage = ""
