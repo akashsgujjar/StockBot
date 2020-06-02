@@ -83,11 +83,12 @@ def finalPrint(conf_list):
 
     conf_list = np.array(conf_list)
     temp = np.argpartition(conf_list, -4)[-4:].tolist()
-
+    conf_list.tolist()
     try:
         for high in temp:
             buy_me += stock_list[high] + "\n"
-        temp.clear()
+        conf_list.clear()
+
     except:
         errorMessage = ""
         for stock in stock_list:
