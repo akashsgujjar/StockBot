@@ -1,9 +1,9 @@
 import time
 from datetime import date, timedelta
 import yfinance as yf
-#from Robinhood import Robinhood
+# from Robinhood import Robinhood
 from urllib.request import urlopen
-#import json
+# import json
 import numpy as np
 from flask import Flask
 
@@ -53,7 +53,7 @@ def analyze_change(tickerDf):
 def get_jsonparsed_data(url):
     response = urlopen(url)
     data = response.read().decode("utf-8")
-    #return json.loads(data)
+    # return json.loads(data)
 
 
 def pe_check(symbol, weight):
@@ -83,14 +83,16 @@ def finalPrint(conf_list):
 
     conf_list = np.array(conf_list)
     temp = np.argpartition(conf_list, -4)[-4:]
-    for high in temp:
-        buy_me += stock_list[high] + "\n"
+    try:
+        for high in temp:
+            buy_me += stock_list[high] + "\n"
+    except:
+        return "something is wrong haha"
     return buy_me
 
 
 @app.route("/")
 def temp():
     return finalPrint(conf_list)
-
 
 # export FLASK_APP=main.py
