@@ -36,3 +36,4 @@ yfinance==0.1.54
 google-endpoints==4.4.0
 google-endpoints-api-management==1.8.0
 google_api_python_client
+uwsgi==2.0.18
