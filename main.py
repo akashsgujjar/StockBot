@@ -5,10 +5,14 @@ import yfinance as yf
 from urllib.request import urlopen
 # import json
 import numpy as np
+from flask import Flask
 
 stock_list = ["EBAY", "KO", "RDFN", "HRB", "ORCL", "MS", "CWEN", "INTC"]
 conf_list = []
-
+app = Flask(__name__)
+if __name__ == '__main__':
+    app.debug = True
+    app.run()
 
 
 def analyze_market(symbol):
@@ -83,15 +87,12 @@ def finalPrint(conf_list):
         for high in temp:
             buy_me += stock_list[high] + "\n"
     except:
-        errorMessage = "something is wrong haha "
         return stock_list
-
     return buy_me
 
 
-#@app.route("/")
+@app.route("/")
 def temp():
     return finalPrint(conf_list)
 
 # export FLASK_APP=main.py
-temp()
