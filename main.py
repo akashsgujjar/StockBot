@@ -87,7 +87,7 @@ def finalPrint(conf_list):
         for high in temp:
             buy_me += stock_list[high] + "\n"
     except:
-        return "something is wrong haha"
+        return "something is wrong haha " + stock_list + " " + temp
     return buy_me
 
 
