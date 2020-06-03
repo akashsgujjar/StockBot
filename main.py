@@ -92,7 +92,7 @@ def finalPrint(conf_list):
         errorMessage = ""
         for stock in stock_list:
             errorMessage += stock + " "
-        for num in temp:
+        for num in conf_list:
             errorMessage += str(num) + " "
         return errorMessage
 
