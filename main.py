@@ -76,14 +76,16 @@ def checkStat(confInt, stock_instrument, robinhood_client, symbol):
         robinhood_client.place_market_buy_order(stock_instrument['url'], symbol, 'GFD', 3)
 
 
-def finalPrint(conf_list):
+def finalPrint(rating):
     buy_me = ""
     for stock in stock_list:
         analyze_market(stock)
 
-    conf_list = np.array(conf_list)
-    temp = np.argpartition(conf_list, -4)[-4:].tolist()
-    conf_list.tolist()
+    rating = np.array(rating)
+    rating.tolist()
+    rating = list(dict.fromkeys(rating))
+    temp = np.argpartition(rating, -4)[-4:].tolist()
+
     try:
         for high in temp:
             buy_me += stock_list[high] + "\n"
@@ -92,7 +94,7 @@ def finalPrint(conf_list):
         errorMessage = ""
         for stock in stock_list:
             errorMessage += stock + " "
-        for num in conf_list:
+        for num in rating:
             errorMessage += str(num) + " "
         return errorMessage
 
