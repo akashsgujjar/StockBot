@@ -5,7 +5,7 @@ import yfinance as yf
 from urllib.request import urlopen
 # import json
 import numpy as np
-from flask import Flask
+from flask import Flask, render_template
 
 stock_list = ["EBAY", "KO", "RDFN", "HRB", "ORCL", "MS", "CWEN", "INTC"]
 conf_list = []
@@ -80,7 +80,6 @@ def finalPrint(rating):
     buy_me = ""
     for stock in stock_list:
         analyze_market(stock)
-
     rating = np.array(rating)
     rating.tolist()
     rating = list(dict.fromkeys(rating))
@@ -103,6 +102,7 @@ def finalPrint(rating):
 
 @app.route("/")
 def temp():
-    return finalPrint(conf_list)
+    return render_template('index.html', buyMe=finalPrint(conf_list))
 
 # export FLASK_APP=main.py
+# finalPrint(conf_list)
