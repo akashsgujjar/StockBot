@@ -7,12 +7,13 @@ from urllib.request import urlopen
 import numpy as np
 from flask import Flask, render_template
 
-stock_list = ["EBAY", "KO", "RDFN", "HRB", "ORCL", "MS", "CWEN", "INTC"]
-conf_list = []
+
 app = Flask(__name__)
 if __name__ == '__main__':
     app.debug = True
     app.run()
+stock_list = ["EBAY", "KO", "RDFN", "HRB", "ORCL", "MS", "CWEN", "INTC"]
+conf_list = []
 
 
 def analyze_market(symbol):
@@ -85,15 +86,25 @@ def finalPrint(rating):
     rating = list(dict.fromkeys(rating))
     temp = np.argpartition(rating, -4)[-4:].tolist()
 
-    for high in temp:
-        buy_me += stock_list[high] + "\n"
+    try:
+        for high in temp:
+            buy_me += stock_list[high] + "\n"
 
+    except:
+        errorMessage = ""
+        for stock in stock_list:
+            errorMessage += stock + " "
+        for num in rating:
+            errorMessage += str(num) + " "
+        return errorMessage
+    print(rating)
     return buy_me
 
 
 @app.route("/")
 def temp():
-    return render_template('index.html', buyMe=finalPrint(conf_list))
-
+    #return render_template('index.html', buyMe=finalPrint(conf_list))
+    return finalPrint(conf_list)
 # export FLASK_APP=main.py
 # finalPrint(conf_list)
+
