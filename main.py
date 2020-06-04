@@ -85,17 +85,8 @@ def finalPrint(rating):
     rating = list(dict.fromkeys(rating))
     temp = np.argpartition(rating, -4)[-4:].tolist()
 
-    try:
-        for high in temp:
-            buy_me += stock_list[high] + "\n"
-
-    except:
-        errorMessage = ""
-        for stock in stock_list:
-            errorMessage += stock + " "
-        for num in rating:
-            errorMessage += str(num) + " "
-        return errorMessage
+    for high in temp:
+        buy_me += stock_list[high] + "\n"
 
     return buy_me
 
