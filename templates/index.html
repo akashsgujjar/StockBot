@@ -81,15 +81,13 @@ https://templatemo.com/tm-536-dream-pulse
             <div
               class="parallax-window"
               data-parallax="scroll"
-              data-image-src="static/dream-pulse-header.jpg">
+              data-image-src="{{url_for('static', filename='dream-pulse-header.jpg')}}">
               <div class="tm-section-wrap">
                 <section id="intro" class="tm-section">
                     <div class="tm-bg-white-transparent tm-intro">
                         <h2 class="tm-section-title mb-5 text-uppercase tm-color-primary">Introducing Dream Pulse</h2>
                         <p class="tm-color-gray">
-                          This box alpha 30 percent. Left sidebar is a sticky element.
-                          Right side Contents are scrolling up and down. This background has a
-                          parallax effect.
+                          Hello, and welcome to my trading bot, my algorithm uses multiple factors to determine which stocks are the best to buy. Right now, our top stocks are {{buyMe}}
                         </p>
                         <p class="mb-0 tm-color-gray">
                           Dream Pulse is a Bootstrap 4.3.1 template designed for your websites. You can modify this layout as you like.
