@@ -100,9 +100,16 @@ def finalPrint(rating):
     return buy_me
 
 
+def printAllStocks():
+    stockReturn = ""
+    for stockName in stock_list:
+        stockReturn += stockName + ", "
+    return stockReturn
+
+
 @app.route("/")
 def temp():
-    return render_template('index.html', buyMe=finalPrint(conf_list))
+    return render_template('index.html', buyMe=finalPrint(conf_list), totalList=printAllStocks())
     # return finalPrint(conf_list)
 
 # export FLASK_APP=main.py
