@@ -12,7 +12,7 @@ if __name__ == '__main__':
     app.debug = True
     app.run()
 
-stock_list = ["EBAY", "KO", "RDFN", "HRB", "ORCL", "MS", "CWEN", "INTC"]
+stock_list = ["EBAY", "KO", "RDFN", "HRB", "ORCL", "MS", "CWEN", "INTC", "MSFT"]
 conf_list = []
 
 

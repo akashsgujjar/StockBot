@@ -60,7 +60,7 @@ https://templatemo.com/tm-536-dream-pulse
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://linkedin.com" class="nav-link tm-social-link">
+                  <a href="https://www.linkedin.com/in/agujjar/" class="nav-link tm-social-link">
                     <i class="fab fa-linkedin-in"></i>
                   </a>
                 </li>
@@ -75,14 +75,16 @@ https://templatemo.com/tm-536-dream-pulse
             <div
               class="parallax-window"
               data-parallax="scroll"
-              data-image-src="{{url_for('static', filename='dream-pulse-header.jpg')}}">
-              <img src="{{url_for('static', filename='dream-pulse-header.jpg')}}" />
+              style="{{url_for('static', filename='dream-pulse-header.jpg')}}"
+              image-src="{{url_for('static', filename='dream-pulse-header.jpg')}}" />
               <div class="tm-section-wrap">
+
                 <section id="intro" class="tm-section">
                     <div class="tm-bg-white-transparent tm-intro">
                         <h2 class="tm-section-title mb-5 text-uppercase tm-color-primary">Introducing Stock Bot</h2>
                         <p class="tm-color-gray">
-                          Hello, and welcome to my trading bot, my algorithm uses multiple factors to determine which stocks are the best to buy. Right now, our top stocks are {{buyMe}}
+                          Hello, and welcome to my trading bot, my algorithm uses multiple factors to determine which stocks
+                          are the best to buy. Right now, our top stocks are <strong>{{buyMe}}</strong>
                         </p>
                     </div>              
                 </section>
