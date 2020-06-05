@@ -5,7 +5,12 @@ import yfinance as yf
 from urllib.request import urlopen
 # import json
 import numpy as np
+from flask import Flask, render_template
 
+app = Flask(__name__)
+if __name__ == '__main__':
+    app.debug = True
+    app.run()
 
 stock_list = ["EBAY", "KO", "RDFN", "HRB", "ORCL", "MS", "CWEN", "INTC"]
 conf_list = []
@@ -95,12 +100,12 @@ def finalPrint(rating):
     return buy_me
 
 
-#@app.route("/")
+@app.route("/")
 def temp():
-    # return render_template('index.html', buyMe=finalPrint(conf_list))
-    return finalPrint(conf_list)
+    return render_template('index.html', buyMe=finalPrint(conf_list))
+    # return finalPrint(conf_list)
 
 # export FLASK_APP=main.py
 # finalPrint(conf_list)
 
-print(temp())
+# print(temp())
