@@ -102,8 +102,8 @@ def finalPrint(rating):
 
 @app.route("/")
 def temp():
-    # return render_template('index.html', buyMe=finalPrint(conf_list))
-    return finalPrint(conf_list)
+    return render_template('index.html', buyMe=finalPrint(conf_list))
+    # return finalPrint(conf_list)
 
 # export FLASK_APP=main.py
 # finalPrint(conf_list)
