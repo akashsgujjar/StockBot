@@ -7,11 +7,11 @@ from urllib.request import urlopen
 import numpy as np
 from flask import Flask, render_template
 
-
 app = Flask(__name__)
 if __name__ == '__main__':
     app.debug = True
     app.run()
+
 stock_list = ["EBAY", "KO", "RDFN", "HRB", "ORCL", "MS", "CWEN", "INTC"]
 conf_list = []
 
@@ -84,8 +84,7 @@ def finalPrint(rating):
     rating = np.array(rating)
     rating.tolist()
     rating = list(dict.fromkeys(rating))
-    temp = np.argpartition(rating, -4)[-4:].tolist()
-
+    temp = np.argpartition(rating, -4)[-4:]
     try:
         for high in temp:
             buy_me += stock_list[high] + "\n"
@@ -103,8 +102,10 @@ def finalPrint(rating):
 
 @app.route("/")
 def temp():
-    #return render_template('index.html', buyMe=finalPrint(conf_list))
+    # return render_template('index.html', buyMe=finalPrint(conf_list))
     return finalPrint(conf_list)
+
 # export FLASK_APP=main.py
 # finalPrint(conf_list)
 
+# print(temp())
