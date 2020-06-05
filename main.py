@@ -87,7 +87,7 @@ def finalPrint(rating):
     highIndex = np.argpartition(rating, -4)[-4:]
     try:
         for high in highIndex:
-            buy_me += stock_list[high] + "\n"
+            buy_me += stock_list[high] + ",\n"
 
     except:
         errorMessage = ""
