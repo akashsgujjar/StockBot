@@ -12,7 +12,6 @@ import matplotlib.pyplot as plt
 
 app = Flask(__name__)
 
-
 stock_list = ["EBAY", "KO", "RDFN", "HRB", "ORCL", "MS", "CWEN", "INTC", "F", "GE", "AAL", "DIS", "DAL", "CCL", "GPRO"]
 conf_list = []
 with open("owned.txt") as f:
@@ -133,7 +132,7 @@ def finalPrint(rating):
     fileSwap()
     with open("owned.txt", "w") as outfile:
         outfile.write("\n".join(ownedList))
-    graphProfit()
+    # graphProfit()
     rating = np.array(rating)
     rating.tolist()
     rating = list(dict.fromkeys(rating))
@@ -158,13 +157,12 @@ def printAllStocks():
     return stockReturn
 
 
-# @app.route("/")
+@app.route("/")
 def temp():
-    # return render_template('index.html', buyMe=finalPrint(conf_list), totalList=printAllStocks())
-    return finalPrint(conf_list)
+    return render_template('index.html', buyMe=finalPrint(conf_list), totalList=printAllStocks())
+    # return finalPrint(conf_list)
 
 # export FLASK_APP=main.py
 # finalPrint(conf_list)
 
 # print(temp())
-temp()
