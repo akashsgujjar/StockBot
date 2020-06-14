@@ -114,5 +114,3 @@ def temp():
 
 # export FLASK_APP=main.py
 # finalPrint(conf_list)
-
-# print(temp())
