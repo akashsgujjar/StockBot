@@ -6,29 +6,26 @@ from urllib.request import urlopen
 # import json
 import numpy as np
 from flask import Flask, render_template
-import pandas
-import csv
-import matplotlib.pyplot as plt
 
 app = Flask(__name__)
+if __name__ == '__main__':
+    app.debug = True
+    app.run()
 
 stock_list = ["EBAY", "KO", "RDFN", "HRB", "ORCL", "MS", "CWEN", "INTC", "F", "GE", "AAL", "DIS", "DAL", "CCL", "GPRO"]
 conf_list = []
-with open("owned.txt") as f:
-    ownedList = f.read().splitlines()
-with open("data.txt", "w") as my_output_file:
-    with open("stocks.csv", "r") as my_input_file:
-        [my_output_file.write(",".join(row) + '\n') for row in csv.reader(my_input_file)]
-    my_output_file.close()
-f = open("data.txt", "a")
 
 
 def analyze_market(symbol):
+    # qr_code = '7LXYQQ2B7EZ3GD5F'
+    # robinhood_client = Robinhood()
+    # robinhood_client.login(username='', password='', qr_code=qr_code)
+    # stock_instrument = robinhood_client.instruments(symbol)[0]
     confInt = .5
     confInt += avgCheck(symbol, .6) * .5
     conf_list.append(confInt)
     # pe_check(symbol, .2)
-    checkStat(confInt, symbol)
+    # checkStat(confInt, stock_instrument, Robinhood, symbol)
 
 
 def avgCheck(symbol, weight):
@@ -65,74 +62,25 @@ def pe_check(symbol, weight):
     print(get_jsonparsed_data(url))
 
 
-def checkStat(confInt, symbol):
+def checkStat(confInt, stock_instrument, robinhood_client, symbol):
     if confInt <= .1:
-        if symbol in ownedList:
-            f.write("," + str(getCurrentPrices(symbol)) + "\n")
-            ownedList.remove(symbol)
+        robinhood_client.place_market_sell_order(stock_instrument['url'], symbol, 'GFD', 3)
     if .1 < confInt <= .3:
-        if symbol in ownedList:
-            f.write("," + str(getCurrentPrices(symbol)) + "\n")
-            ownedList.remove(symbol)
-    if .3 < confInt <= .5:
-        if symbol in ownedList:
-            f.write("," + str(getCurrentPrices(symbol)) + "\n")
-            ownedList.remove(symbol)
-    if .5 < confInt <= .7:
-        f.write(str(getCurrentPrices(symbol)) + "\n")
-        ownedList.append(symbol)
+        robinhood_client.place_market_sell_order(stock_instrument['url'], symbol, 'GFD', 2)
+    if .3 < confInt <= .4:
+        robinhood_client.place_market_sell_order(stock_instrument['url'], symbol, 'GFD', 1)
+    if .6 < confInt <= .7:
+        robinhood_client.place_market_buy_order(stock_instrument['url'], symbol, 'GFD', 1)
     if .7 < confInt <= .9:
-        f.write(str(getCurrentPrices(symbol)) + "\n")
-        ownedList.append(symbol)
+        robinhood_client.place_market_buy_order(stock_instrument['url'], symbol, 'GFD', 2)
     if confInt >= .9:
-        f.write(str(getCurrentPrices(symbol)) + "\n")
-        ownedList.append(symbol)
-
-
-def getCurrentPrices(symbol):
-    tickerData = yf.Ticker(symbol)
-    today = date.today()
-    current_date = today.strftime("%Y-%m-%d")
-    start_date_short = (date.today() - timedelta(days=1)).isoformat()
-    short_term = tickerData.history(period='1d', start=start_date_short, end=current_date)
-    return short_term['Open'].to_list()[0]
-
-
-def fileSwap():
-    read_file = pandas.read_csv("data.txt")
-    read_file.to_csv("stocks.csv", index=None)
-    stockDF = pandas.read_csv("stocks.csv")
-    bought = stockDF['Bought'].sum()
-    sold = stockDF['Sold'].sum()
-    coords = open("coords.txt", "a")
-    coords.write(str(sold - bought) + "\n")
-
-
-def graphProfit():
-    xList = []
-    yList = []
-    start = 0
-    with open('coords.txt', 'r') as f:
-        coordinateString = [line.strip() for line in f]
-    for _ in coordinateString:
-        xList.append(start)
-        start += 1
-    for val in coordinateString:
-        yList.append(float(val))
-    plt.ylabel("Profits")
-    plt.xlabel("Days")
-    plt.plot(xList, yList)
-    plt.savefig('static/akashofclans.png')
+        robinhood_client.place_market_buy_order(stock_instrument['url'], symbol, 'GFD', 3)
 
 
 def finalPrint(rating):
     buy_me = ""
     for stock in stock_list:
         analyze_market(stock)
-    fileSwap()
-    with open("owned.txt", "w") as outfile:
-        outfile.write("\n".join(ownedList))
-    # graphProfit()
     rating = np.array(rating)
     rating.tolist()
     rating = list(dict.fromkeys(rating))
@@ -140,6 +88,7 @@ def finalPrint(rating):
     try:
         for high in highIndex:
             buy_me += stock_list[high] + ",\n"
+
     except:
         errorMessage = ""
         for stock in stock_list:
@@ -147,6 +96,7 @@ def finalPrint(rating):
         for num in rating:
             errorMessage += str(num) + " "
         return errorMessage
+    print(rating)
     return buy_me
 
 
